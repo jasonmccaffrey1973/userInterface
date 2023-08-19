@@ -5,6 +5,8 @@ import DropDownMenu from './DropDownMenu'
 import Pencil from '../public/image-components/Pencil'
 import Profile from '../public/image-components/Profile'
 import Hamburger from '../public/image-components/Hamburger'
+import { headerMenu } from '../Application/Constants/menus'
+import House from '../public/image-components/House'
 
 /** ----------------------------------------------------------------
  *  @returns
@@ -29,12 +31,12 @@ const Header = () => {
   return (
     <StyledHeader>
       <div className="left">
-      {/* <DropDownMenu 
-          menuItems={[]}
+      <DropDownMenu 
+          menuItems={headerMenu}
           direction='down'
           position='left'
           trigger={<Hamburger size='1.8rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />}
-        /> */}
+        />
       </div>
       <div className="center"></div>
       <div className="right">

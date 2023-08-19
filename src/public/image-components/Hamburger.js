@@ -12,8 +12,10 @@ const Hamburger = ({color = 'hsla(0, 0%, 0%, 1.00)', hover = color, size = '5rem
   )
 }
 
-const StyledHamburgerMenu = styled.div`
+const StyledHamburgerMenu = styled.button`
     --height: ${props => props.height};
+    background-color: transparent;
+    border: none;
     display: grid;
     place-items: center;
     color: ${props => props.color};

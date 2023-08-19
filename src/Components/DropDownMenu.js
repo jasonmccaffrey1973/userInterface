@@ -10,21 +10,40 @@ import isFunction from "../Application/Utilities/isFunction"
 const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
     const [open, setOpen] = useState(false)
     const menuId = useId()
-    console.log('direction', direction, 'position', position);
+    const triggerType = trigger?.type?.name;
+    console.log('menuItems', menuItems);
   return (
-    <MenuWrapper id={menuId}>
-        <div className="menuTrigger" onClick={() => setOpen((prev) => (!prev))}>
-            {trigger}
-        </div>
-    <StyledMenu direction={direction} position={position} aria-expanded={open}>
+    <>
+      {triggerType !== 'Hamburger' ? (
+        <ButtonMenuWrapper id={menuId} aria-haspopup="true" aria-expanded={open} onClick={()=>setOpen(!open)}>
+          {trigger}
+          <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
+        </ButtonMenuWrapper>
+      ) : (
+        <DivMenuWrapper id={menuId} aria-haspopup="true" aria-expanded={open} onClick={()=>setOpen(!open)}>
+          {trigger}
+          <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
+        </DivMenuWrapper>
+      )}
+    </>
+  )
+}
+
+
+/** ----------------------------------------------------------------
+ * @param {*} param0 
+ * @returns 
+ * ----------------------------------------------------------------- */
+const Menu = ({menuItems, direction, position, setOpen, menuId, open}) => {
+    return (
+        <StyledMenu direction={direction} position={position} aria-expanded={open}>
         {menuItems.map((item, index) => {
             return (
                 <MenuItem key={`${menuId}-${index}`} item={item} setOpen={setOpen} />
             )
         })}
     </StyledMenu>
-    </MenuWrapper>
-  )
+    )
 }
 
 /** ----------------------------------------------------------------
@@ -33,13 +52,15 @@ const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
  * ----------------------------------------------------------------- */
 const MenuItem = ({item, setOpen}) => {
     const itemId = useId()
+    const icon = item?.icon ? item.icon : ' ';
+    const label = item?.label ? item.label : item.title ? item.title : ' ';
     return (
         <StyledMenuItem key={itemId} onClick={()=>{
             setOpen(false)
             isFunction(item.clickFn) && item.clickFn()
         }}>
-            <div className="icon">{item.icon ? item.icon : ''}</div>
-            <div className="label">{item.label}</div>
+            <div className="icon">{icon}</div>
+            <div className="label">{label}</div>
         </StyledMenuItem>
     )
 }
@@ -70,11 +91,23 @@ const directionProps = ({direction, position}) => {
         }
     }
 
-
 /** ----------------------------------------------------------------
  * Styled Components
  * ----------------------------------------------------------------- */
-const MenuWrapper = styled.div`
+const ButtonMenuWrapper = styled.button`
+    background-color: transparent;
+    border: none;
+    position: relative;
+    width: fit-content;
+    padding: 0.33rem;
+    &:hover {
+        cursor: pointer;
+    }
+`;
+
+const DivMenuWrapper = styled.div`
+    background-color: transparent;
+    border: none;
     position: relative;
     width: fit-content;
     padding: 0.33rem;
@@ -111,6 +144,7 @@ const StyledMenu = styled.ul`
 
 const StyledMenuItem = styled.li`
     min-height: 2.5rem;
+    transition: box-shadow 250ms ease-in-out;
     .icon {
         grid-area: icon;
         display: grid;
@@ -131,11 +165,13 @@ const StyledMenuItem = styled.li`
         transition: background-color 250ms ease-in-out;
     }
     &:hover {
+        --hover-color: hsla(0, 0%, 39%, 0.33);
+        box-shadow: inset 0.125rem 0.125rem 0rem 0rem rgba(0,0,0,0.15);
         .label {
-            background-color: hsla(0, 0%, 0%, 0.05);
+            background-color: var(--hover-color);
         }
         .icon {
-            background-color: hsla(0, 0%, 0%, 0.05);
+            background-color: var(--hover-color);
             border-right: 1px solid hsla(0, 0%, 0%, 0.0);
         }
     }
