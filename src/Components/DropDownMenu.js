@@ -172,6 +172,7 @@ const StyledMenuItem = styled.li`
     white-space: nowrap;
     padding-inline-start: 0.5rem;
     transition: background-color 250ms ease-in-out;
+    color: var(--Text);
   }
   &:hover {
     --hover-color: var(--Accent);

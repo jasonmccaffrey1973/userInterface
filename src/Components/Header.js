@@ -2,41 +2,20 @@
 import { styled } from 'styled-components'
 import Gear from '../public/image-components/Gear'
 import DropDownMenu from './DropDownMenu'
-import Pencil from '../public/image-components/Pencil'
-import Profile from '../public/image-components/Profile'
 import Hamburger from '../public/image-components/Hamburger'
-import { headerMenu } from '../Application/Constants/menus'
+import { headerMenu, OptionMenu } from '../Application/Constants/menus'
 import { useThemeContext } from '../Contexts/ThemeContext'
-
-/** ----------------------------------------------------------------
- *  @returns
- * ----------------------------------------------------------------- */
-const OptionMenu = color =>{
-  const {Text} = useThemeContext().themeColors
-return [
-  {
-    label: 'View Profile',
-    icon: <Profile  size='1rem' color={Text} />,
-    clickFn: () => alert('View Profile')
-  },
-  {
-    label: 'Edit Profile',
-    icon: <Pencil size='1rem' color={Text} />,
-    clickFn: () => alert('Edit Profile')
-  },
-]}
 
 /** ----------------------------------------------------------------
  * @returns
  * ----------------------------------------------------------------- */
 const Header = () => {
   const {Text, TextAccent } = useThemeContext().themeColors
-  console.log(useThemeContext());
   return (
     <StyledHeader>
       <div className="left">
       <DropDownMenu 
-          menuItems={headerMenu}
+          menuItems={headerMenu({color: Text, hover: TextAccent})}
           direction='down'
           position='left'
           trigger={<Hamburger size='1.8rem' color={Text} hover={TextAccent} />}
@@ -45,7 +24,7 @@ const Header = () => {
       <div className="center"></div>
       <div className="right">
         <DropDownMenu 
-          menuItems={OptionMenu(Text)}
+          menuItems={OptionMenu({color: Text})}
           direction='down'
           position='right'
           trigger={<Gear size='1.8rem' color={Text} hover={TextAccent} />}

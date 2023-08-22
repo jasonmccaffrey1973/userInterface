@@ -1,19 +1,35 @@
 import House from "../../public/image-components/House";
+import Pencil from "../../public/image-components/Pencil";
 import Phone from "../../public/image-components/Phone";
+import Profile from "../../public/image-components/Profile";
 
-export const headerMenu = [
+export const OptionMenu = ({color = 'hsla(0, 0%, 40%, 1.00)'})=>{
+  return [
+    {
+      label: 'View Profile',
+      icon: <Profile  size='1rem' color={color} />,
+      clickFn: () => alert('View Profile')
+    },
+    {
+      label: 'Edit Profile',
+      icon: <Pencil size='1rem' color={color} />,
+      clickFn: () => alert('Edit Profile')
+    },
+  ]}
+
+export const headerMenu = ({color = 'hsla(0, 0%, 40%, 1.00)', hover = 'hsla(0, 0%, 20%, 1.00)'}) => [
     {
         id: 1,
         title: 'Home',
         url: '/',
-        icon: <House size='1rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />,
+        icon: <House size='1rem' color={color} hover={hover} />,
         submenu: []
     },
     {
         id: 2,
         title: 'About',
         url: '/about',
-        // icon: <QuestionMark size='1rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />,
+        // icon: <QuestionMark size='1rem' color={color} hover={hover} />,
         icon: '',
         submenu: []
     },
@@ -21,7 +37,7 @@ export const headerMenu = [
         id: 3,
         title: 'Contact',
         url: '/contact',
-        icon: <Phone size='1rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />,
+        icon: <Phone size='1rem' color={color} hover={hover} />,
         submenu: []
     },
     // {

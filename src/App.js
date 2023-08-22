@@ -9,8 +9,8 @@ import { ThemeProvider } from './Contexts/ThemeContext'
 const App = () => {
   return (
     <>
-    <ApplicationStyles />
     <ThemeProvider>
+      <ApplicationStyles />
       <StyledApp layout={UserPreferences.layout}>
         <Header/>
         <Footer/>

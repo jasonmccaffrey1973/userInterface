@@ -1,6 +1,6 @@
 export const THEMES = ['dark', 'light', 'custom'];
 
-const basecColors = {
+const baseColors = {
     Black: 'hsla(0, 0%, 0%, 1)',
     White: 'hsla(0, 0%, 100%, 1)',
     Gray: 'hsla(0, 0%, 50%, 1)',
@@ -13,7 +13,7 @@ const basecColors = {
     Violet: 'hsla(300, 76%, 72%, 1)'
 };
 
-export const darkTheme = { ...basecColors,
+export const darkTheme = { ...baseColors,
     Primary: 'hsla(260, 11%, 31%, 1)',
     PrimaryLight: 'hsla(260, 11%, 50%, 1)',
     Secondary: 'hsla(296, 9%, 37%, 1)',
@@ -22,7 +22,7 @@ export const darkTheme = { ...basecColors,
     TextAccent: 'hsla(43, 100%, 90%, 1)',
 };
 
-export const lightTheme = { ...basecColors,
+export const lightTheme = { ...baseColors,
     Primary: 'hsla(43, 48%, 93%, 1)',
     PrimaryLight: 'hsla(43, 48%, 97%, 1)',
     Secondary: 'hsla(0, 0%, 100%, 1)',
