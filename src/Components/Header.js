@@ -6,28 +6,32 @@ import Pencil from '../public/image-components/Pencil'
 import Profile from '../public/image-components/Profile'
 import Hamburger from '../public/image-components/Hamburger'
 import { headerMenu } from '../Application/Constants/menus'
-import House from '../public/image-components/House'
+import { useThemeContext } from '../Contexts/ThemeContext'
 
 /** ----------------------------------------------------------------
  *  @returns
  * ----------------------------------------------------------------- */
-const OptionMenu = [
+const OptionMenu = color =>{
+  const {Text} = useThemeContext().themeColors
+return [
   {
     label: 'View Profile',
-    icon: <Profile  size='1rem' color='hsla(0, 0%, 40%, 1.00)' />,
+    icon: <Profile  size='1rem' color={Text} />,
     clickFn: () => alert('View Profile')
   },
   {
     label: 'Edit Profile',
-    icon: <Pencil size='1rem' color='hsla(0, 0%, 40%, 1.00)' />,
+    icon: <Pencil size='1rem' color={Text} />,
     clickFn: () => alert('Edit Profile')
   },
-]
+]}
 
 /** ----------------------------------------------------------------
  * @returns
  * ----------------------------------------------------------------- */
 const Header = () => {
+  const {Text, TextAccent } = useThemeContext().themeColors
+  console.log(useThemeContext());
   return (
     <StyledHeader>
       <div className="left">
@@ -35,16 +39,16 @@ const Header = () => {
           menuItems={headerMenu}
           direction='down'
           position='left'
-          trigger={<Hamburger size='1.8rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />}
+          trigger={<Hamburger size='1.8rem' color={Text} hover={TextAccent} />}
         />
       </div>
       <div className="center"></div>
       <div className="right">
         <DropDownMenu 
-          menuItems={OptionMenu}
+          menuItems={OptionMenu(Text)}
           direction='down'
           position='right'
-          trigger={<Gear size='1.8rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />}
+          trigger={<Gear size='1.8rem' color={Text} hover={TextAccent} />}
         />
       </div>
     </StyledHeader>

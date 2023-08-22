@@ -49,6 +49,7 @@ justify-content: space-between;
     font-size: 1.5rem;
     font-weight: 500;
     margin-block: 0.67rem 0.33rem;
+    color: var(--TextAccent);
 }
 
 .column-links-wrapper {
@@ -63,7 +64,7 @@ justify-content: space-between;
 .footer-link {
     font-size: 1rem;
     font-weight: 400;
-    color: rgba(50, 50, 50, 1.00);
+    color: var(--Text);
     text-decoration: none;
     transition: all 0.2s ease-in-out;
 }

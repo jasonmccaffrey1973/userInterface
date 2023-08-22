@@ -2,6 +2,8 @@ import {useId, useState} from "react"
 // import { Link } from "react-router-dom"
 import { styled } from "styled-components"
 import isFunction from "../Application/Utilities/isFunction"
+import getLargestIcon from "../Application/Utilities/getLargestIcon"
+import titleCase from "../Application/Utilities/titleCase"
 
 /** ----------------------------------------------------------------
  * @param {*} param0 
@@ -11,7 +13,6 @@ const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
     const [open, setOpen] = useState(false)
     const menuId = useId()
     const triggerType = trigger?.type?.name;
-    console.log('menuItems', menuItems);
   return (
     <>
       {triggerType !== 'Hamburger' ? (
@@ -35,11 +36,13 @@ const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
  * @returns 
  * ----------------------------------------------------------------- */
 const Menu = ({menuItems, direction, position, setOpen, menuId, open}) => {
+    if (!Array.isArray(menuItems)) return (<></>)
+    const largestIcon = parseFloat(getLargestIcon(menuItems)) + 'rem'
     return (
         <StyledMenu direction={direction} position={position} aria-expanded={open}>
         {menuItems.map((item, index) => {
             return (
-                <MenuItem key={`${menuId}-${index}`} item={item} setOpen={setOpen} />
+                <MenuItem key={`${menuId}-${index}`} item={item} setOpen={setOpen} iconsize={largestIcon} />
             )
         })}
     </StyledMenu>
@@ -50,20 +53,24 @@ const Menu = ({menuItems, direction, position, setOpen, menuId, open}) => {
  * @param {*} param0 
  * @returns 
  * ----------------------------------------------------------------- */
-const MenuItem = ({item, setOpen}) => {
-    const itemId = useId()
+const MenuItem = ({ item, setOpen, iconsize }) => {
+    const itemId = useId();
     const icon = item?.icon ? item.icon : ' ';
     const label = item?.label ? item.label : item.title ? item.title : ' ';
+  
     return (
-        <StyledMenuItem key={itemId} onClick={()=>{
-            setOpen(false)
-            isFunction(item.clickFn) && item.clickFn()
-        }}>
-            <div className="icon">{icon}</div>
-            <div className="label">{label}</div>
-        </StyledMenuItem>
-    )
-}
+      <StyledMenuItem key={itemId} iconsize={iconsize} onClick={() => {
+        setOpen(false);
+        isFunction(item.clickFn) && item.clickFn();
+      }}>
+        <div className="icon">
+          {icon}
+        </div>
+        <div className="label">{titleCase(label)}</div>
+      </StyledMenuItem>
+    );
+  };
+  
 
 /** ----------------------------------------------------------------
  * @param {*} direction 
@@ -110,7 +117,7 @@ const DivMenuWrapper = styled.div`
     border: none;
     position: relative;
     width: fit-content;
-    padding: 0.33rem;
+    margin-inline: 0.33rem;
     &:hover {
         cursor: pointer;
     }
@@ -126,7 +133,7 @@ const StyledMenu = styled.ul`
     transform: scaleY(0);
     position: absolute;
     box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
-    background-color: hsla(0, 0%, 100%, 1.00);
+    background-color: var(--Secondary);
     z-index: 100;
     transition: transform 250ms ease-in-out;
     &[aria-expanded="true"] {
@@ -143,38 +150,41 @@ const StyledMenu = styled.ul`
 
 
 const StyledMenuItem = styled.li`
-    min-height: 2.5rem;
-    transition: box-shadow 250ms ease-in-out;
-    .icon {
-        grid-area: icon;
-        display: grid;
-        place-items: center;
-        height: 100%;
-        padding: 0 0.66rem;
-        border-right: 1px solid hsla(0, 0%, 0%, 0.1);
-        background-color: rgba(0,0,0,0.075);
-        transition: background-color 250ms ease-in-out;
-    }
+   --icon-size: ${props => props.iconsize || '2.5rem'};
+  min-height: 2.5rem;
+  transition: box-shadow 250ms ease-in-out;
+  .icon {
+    grid-area: icon;
+    display: grid;
+    place-items: center;
+    height: 100%;
+    width: var(--icon-size);
+    padding-inline: 1rem;
+    border-right: 1px solid hsla(0, 0%, 0%, 0.1);
+    background-color: rgba(0, 0, 0, 0.075);
+    transition: background-color 250ms ease-in-out;
+  }
+  .label {
+    grid-area: text;
+    display: grid;
+    place-items: center start;
+    height: 100%;
+    white-space: nowrap;
+    padding-inline-start: 0.5rem;
+    transition: background-color 250ms ease-in-out;
+  }
+  &:hover {
+    --hover-color: var(--Accent);
+    box-shadow: inset 0.125rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.15);
     .label {
-        grid-area: text;
-        display: grid;
-        place-items: center start;
-        height: 100%;
-        white-space: nowrap;
-        padding-inline-start: 0.5rem;
-        transition: background-color 250ms ease-in-out;
+      background-color: var(--hover-color);
     }
-    &:hover {
-        --hover-color: hsla(0, 0%, 39%, 0.33);
-        box-shadow: inset 0.125rem 0.125rem 0rem 0rem rgba(0,0,0,0.15);
-        .label {
-            background-color: var(--hover-color);
-        }
-        .icon {
-            background-color: var(--hover-color);
-            border-right: 1px solid hsla(0, 0%, 0%, 0.0);
-        }
+    .icon {
+      background-color: var(--hover-color);
+      border-right: 1px solid hsla(0, 0%, 0%, 0.0);
     }
+  }
 `;
+
 
 export default DropDownMenu

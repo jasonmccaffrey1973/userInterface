@@ -3,19 +3,22 @@ import UserPreferences from './Application/Models/UserPreferences'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
+import { ThemeProvider } from './Contexts/ThemeContext'
 
 
 const App = () => {
   return (
     <>
     <ApplicationStyles />
-    <StyledApp layout={UserPreferences.layout}>
-      <Header/>
-      <Footer/>
-      <main>Main</main>
-      <aside>Secondary Sidebar</aside>
-      <aside className="sidebar">Primary Sidebar</aside>
-    </StyledApp>
+    <ThemeProvider>
+      <StyledApp layout={UserPreferences.layout}>
+        <Header/>
+        <Footer/>
+        <main>Main</main>
+        <aside>Secondary Sidebar</aside>
+        <aside className="sidebar">Primary Sidebar</aside>
+      </StyledApp>
+    </ThemeProvider>
     </>
   )
 }
@@ -34,7 +37,8 @@ grid-template-areas: ${props => props.layout};
 > header, > footer {
   height: fit-content;
   min-height: 4rem;
-  background-color: #ccc;
+  background-color: var(--Primary);
+  color: var(--Text);
   display: grid;
   align-items: center;
   padding-inline: 0.67rem;

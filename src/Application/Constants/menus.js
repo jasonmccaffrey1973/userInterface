@@ -1,6 +1,5 @@
 import House from "../../public/image-components/House";
 import Phone from "../../public/image-components/Phone";
-import QuestionMark from "../../public/image-components/QuestionMark";
 
 export const headerMenu = [
     {
@@ -14,7 +13,8 @@ export const headerMenu = [
         id: 2,
         title: 'About',
         url: '/about',
-        icon: <QuestionMark size='1rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />,
+        // icon: <QuestionMark size='1rem' color='hsla(0, 0%, 40%, 1.00)' hover='hsla(0, 0%, 20%, 1.00)' />,
+        icon: '',
         submenu: []
     },
     {

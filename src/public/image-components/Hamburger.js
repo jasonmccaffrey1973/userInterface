@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 
 const Hamburger = ({color = 'hsla(0, 0%, 0%, 1.00)', hover = color, size = '5rem'}) => {
     const [open, setOpen] = useState(false)
+    console.log(color, hover, size);
   return (
     <StyledHamburgerMenu aria-expanded={open} color={color} height={size} hover={hover} onClick={()=>setOpen(!open)} >
         <div className="hamburger-menu-line top" />
