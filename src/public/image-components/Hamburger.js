@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import { styled } from 'styled-components'
 
-const Hamburger = ({color = 'hsla(0, 0%, 0%, 1.00)', hover = color, size = '5rem'}) => {
-    const [open, setOpen] = useState(false)
+const Hamburger = ({color = 'hsla(0, 0%, 0%, 1.00)', hover = color, size = '5rem', open, setOpen }) => {
   return (
     <StyledHamburgerMenu aria-expanded={open} color={color} height={size} hover={hover} onClick={()=>setOpen(!open)} >
         <div className="hamburger-menu-line top" />
@@ -29,7 +27,7 @@ const StyledHamburgerMenu = styled.button`
         width: 100%;
         height: calc(var(--height) / 10);
         background-color: currentColor;
-        transition: transform 250ms ease-in-out 0s, opacity 50ms ease-in-out 250ms;
+        transition: transform 250ms ease-in-out 0s, opacity 50ms ease-in-out 200ms;
         border-radius: var(--height);
         position: absolute;
         }
@@ -49,6 +47,7 @@ const StyledHamburgerMenu = styled.button`
         }
         .middle {
             opacity: 0;
+            transition: opacity 50ms ease-in-out;
         }
         .bottom {
             transform: translateY(0)

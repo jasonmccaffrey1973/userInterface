@@ -22,7 +22,7 @@ export const headerMenu = ({color = 'hsla(0, 0%, 40%, 1.00)', hover = 'hsla(0, 0
         id: 1,
         title: 'Home',
         url: '/',
-        icon: <House size='1rem' color={color} hover={hover} />,
+        icon: <House size='1rem' color={color} />,
         submenu: []
     },
     {
@@ -37,7 +37,7 @@ export const headerMenu = ({color = 'hsla(0, 0%, 40%, 1.00)', hover = 'hsla(0, 0
         id: 3,
         title: 'Contact',
         url: '/contact',
-        icon: <Phone size='1rem' color={color} hover={hover} />,
+        icon: <Phone size='1rem' color={color} />,
         submenu: []
     },
     // {

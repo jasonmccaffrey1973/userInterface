@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useMemo, useEffect } from 'react';
 import { darkTheme, lightTheme } from '../Application/Constants/themeColors';
+import UserPreferences from '../Application/Models/UserPreferences';
 
 const ThemeContext = createContext();
 
@@ -8,20 +9,14 @@ export const useThemeContext = () => {
 }
 
 export const ThemeProvider = ({ children }) => {
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useState(prefersDark ? 'dark' : 'light');
+  const userPreferences = UserPreferences;
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const [theme, setTheme] = useState(userPreferences.theme || systemTheme);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleMediaChange = event => {
-      setTheme(event.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleMediaChange);
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaChange);
-    };
-  }, []);
+    setTheme(userPreferences.theme || systemTheme);
+  }, [userPreferences.theme, systemTheme]);
+  
 
   const themeColors = useMemo(() => {        
     switch (theme) {
@@ -32,7 +27,9 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   const themeContextValue = {
+    userPreferences,
     theme,
+    setTheme,
     themeColors,
   };
 

@@ -50,7 +50,6 @@ const StyledHeader = styled.header`
   height: 3.5rem;
   width: 100%;
   margin: 0;
-  margin-block-end: 0.5rem;
   
   .left {
     grid-area: left;

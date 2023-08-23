@@ -4,6 +4,7 @@ import { styled } from "styled-components"
 import isFunction from "../Application/Utilities/isFunction"
 import getLargestIcon from "../Application/Utilities/getLargestIcon"
 import titleCase from "../Application/Utilities/titleCase"
+import Hamburger from "../public/image-components/Hamburger"
 
 /** ----------------------------------------------------------------
  * @param {*} param0 
@@ -16,13 +17,13 @@ const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
   return (
     <>
       {triggerType !== 'Hamburger' ? (
-        <ButtonMenuWrapper id={menuId} aria-haspopup="true" aria-expanded={open} onClick={()=>setOpen(!open)}>
+        <ButtonMenuWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
           {trigger}
           <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
         </ButtonMenuWrapper>
       ) : (
-        <DivMenuWrapper id={menuId} aria-haspopup="true" aria-expanded={open} onClick={()=>setOpen(!open)}>
-          {trigger}
+        <DivMenuWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
+          <Hamburger size={trigger.props.size} color={trigger.props.color} hover={trigger.props.hover} open={open} setOpen={setOpen} />
           <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
         </DivMenuWrapper>
       )}

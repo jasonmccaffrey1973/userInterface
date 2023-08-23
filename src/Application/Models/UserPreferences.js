@@ -1,5 +1,5 @@
 const UserPreferences = {
-    theme: 'dark',
+    theme: 'light',
     layout: "'header header header' 'primary-sidebar main secondary-sidebar' 'footer footer footer'",
     notifications: true,
     notification_type: 'email',
