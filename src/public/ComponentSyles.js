@@ -90,11 +90,12 @@ export const Button = styled.button`
     transition: background-color 250ms ease-in-out, color 150ms ease-in-out 100ms, box-shadow 250ms ease-in-out;
     letter-spacing: 0.05rem;
     min-width: 8rem;
-    &:hover {
+    &:hover, &:focus {
         cursor: pointer;
         background-color: var(--Accent);
         color: var(--Text);
         box-shadow: inset 0 0.25rem 0.5rem hsla(0, 0%, 0%, 0.5);
+        outline: none;
     }
 `;
 

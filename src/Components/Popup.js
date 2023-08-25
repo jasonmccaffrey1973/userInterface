@@ -63,7 +63,7 @@ const Popup = ({children, trigger, header = {title: 'Modal', showClose: true}}) 
         <ModalHeader>
             <ModalTitle className='title'>{header.title}</ModalTitle>
             <Render if={header.showClose}>
-                <ButtonWrapper className='close' onClick={()=>setOpen(!open)}><HeaderClose>&times;</HeaderClose></ButtonWrapper>
+                <HeaderClose className='close' onClick={()=>setOpen(!open)}>&times;</HeaderClose>
             </Render>
         </ModalHeader>
         <ModalBody>
@@ -119,18 +119,23 @@ const ModalTitle = styled.h2`
     font-weight: 600;
 `;
 
-const HeaderClose = styled.span`
+const HeaderClose = styled.button`
     position: absolute;
     top: -0.25rem;
     right: 0;
+    display: grid;
+    place-items: center;
+    background-color: transparent;
+    border: none;
     font-size: 2rem;
     font-weight: 300;
     aspect-ratio: 1;
     color: var(--Text);
     transition: color 250ms ease-in-out;
-    &:hover {
+    &:hover, &:focus {
         cursor: pointer;
         color: var(--Accent);
+        outline: none;
     }
 `;
 
