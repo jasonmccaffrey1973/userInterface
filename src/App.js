@@ -17,8 +17,7 @@ const App = () => {
         <Footer/>
         <main>
           <Popup trigger={<span>Open Dialog</span>}>
-            <h1>Popup</h1>
-            <p>Popup content</p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas, consequuntur inventore. Ipsam rerum quae, expedita debitis tempora perspiciatis ducimus a, voluptates dolores totam commodi ad minus earum quibusdam ea hic praesentium quidem! Asperiores, corrupti. Accusantium deserunt quibusdam libero tempora id nesciunt perspiciatis veritatis, autem quam officiis voluptatum labore? Fugit eos error facilis et earum perferendis, fugiat sequi quam quis, hic ex rerum? Aliquam ducimus iusto in minima cum soluta alias, blanditiis nostrum totam nam corrupti non cupiditate dolore veritatis doloribus culpa voluptatibus, perferendis dolorum ex, distinctio eum nobis quas! Culpa omnis iusto pariatur hic voluptatem suscipit aperiam, explicabo repudiandae in eum tempore, quis provident eius voluptates vel, praesentium quos consequatur! Ipsam, autem debitis! Quos cumque voluptatibus suscipit excepturi sed sit reiciendis cum, assumenda, accusamus praesentium, voluptates vitae quaerat! Delectus quos esse optio modi officiis magnam, facilis ab temporibus, totam vel nesciunt! Pariatur consectetur voluptatum, delectus iusto perferendis officiis voluptas incidunt in excepturi nostrum, reiciendis eum, quibusdam reprehenderit sunt! Laborum sapiente quaerat architecto rerum delectus, earum culpa enim magni, asperiores reprehenderit explicabo ullam incidunt, rem consectetur voluptatibus nisi corporis eos iste voluptate eveniet numquam quos atque dolores necessitatibus. Cumque corporis nobis facilis reprehenderit! Ullam vel, iste similique voluptatibus debitis aspernatur minus?
           </Popup>
           
 

@@ -6,9 +6,15 @@ const ApplicationStyles = () => {
   
     const GlobalStyle = createGlobalStyle`
       :root {
+      --TextXSmall: 0.66rem;
+      --TextSmall: 0.83rem;
+      --TextMedium: 1.1rem;
+      --TextLarge:  1.25rem;
+      --TextXLarge: 1.33rem;
         ${Object.entries(themeColors)
           .map(([key, value]) => `--${key}: ${value};`)
           .join('\n')}
+          
       }
   
       *, *::before, *::after {

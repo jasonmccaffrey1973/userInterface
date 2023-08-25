@@ -5,6 +5,7 @@ import isFunction from "../Application/Utilities/isFunction"
 import getLargestIcon from "../Application/Utilities/getLargestIcon"
 import titleCase from "../Application/Utilities/titleCase"
 import Hamburger from "../public/image-components/Hamburger"
+import { ButtonWrapper, DivWrapper } from "../public/ComponentSyles"
 
 /** ----------------------------------------------------------------
  * @param {*} param0 
@@ -17,20 +18,19 @@ const DropDownMenu = ({menuItems, direction, trigger, position = 'left'}) => {
   return (
     <>
       {triggerType !== 'Hamburger' ? (
-        <ButtonMenuWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
+        <ButtonWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
           {trigger}
           <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
-        </ButtonMenuWrapper>
+        </ButtonWrapper>
       ) : (
-        <DivMenuWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
+        <DivWrapper id={menuId} aria-expanded={open} onClick={()=>setOpen(!open)}>
           <Hamburger size={trigger.props.size} color={trigger.props.color} hover={trigger.props.hover} open={open} setOpen={setOpen} />
           <Menu menuItems={menuItems} direction={direction} position={position} open={open} setOpen={setOpen}  menuId={menuId} />
-        </DivMenuWrapper>
+        </DivWrapper>
       )}
     </>
   )
 }
-
 
 /** ----------------------------------------------------------------
  * @param {*} param0 
@@ -102,27 +102,6 @@ const directionProps = ({direction, position}) => {
 /** ----------------------------------------------------------------
  * Styled Components
  * ----------------------------------------------------------------- */
-const ButtonMenuWrapper = styled.button`
-    background-color: transparent;
-    border: none;
-    position: relative;
-    width: fit-content;
-    padding: 0.33rem;
-    &:hover {
-        cursor: pointer;
-    }
-`;
-
-const DivMenuWrapper = styled.div`
-    background-color: transparent;
-    border: none;
-    position: relative;
-    width: fit-content;
-    margin-inline: 0.33rem;
-    &:hover {
-        cursor: pointer;
-    }
-`;
 
 const StyledMenu = styled.ul`
     margin: 0;
