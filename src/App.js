@@ -4,6 +4,7 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
+import Popup from './Components/Popup'
 
 
 const App = () => {
@@ -14,7 +15,14 @@ const App = () => {
       <StyledApp layout={UserPreferences.layout}>
         <Header/>
         <Footer/>
-        <main>Main</main>
+        <main>
+          <Popup trigger={<span>Open Dialog</span>}>
+            <h1>Popup</h1>
+            <p>Popup content</p>
+          </Popup>
+          
+
+        </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
       </StyledApp>

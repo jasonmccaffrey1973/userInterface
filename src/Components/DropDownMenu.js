@@ -166,6 +166,7 @@ const StyledMenuItem = styled.li`
     transition: background-color 250ms ease-in-out;
   }
   .label {
+    font-size: 1rem;
     grid-area: text;
     display: grid;
     place-items: center start;
