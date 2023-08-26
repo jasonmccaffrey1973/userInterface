@@ -20,7 +20,7 @@ const bootstrapColor = (color) => {
         case 'info':
             return 'var(--Yellow)'
         default:
-            return 'var(--Primary)'
+            return `var(--${color})`
     }
 }
 

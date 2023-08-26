@@ -9,6 +9,7 @@ import isFunction from '../Application/Utilities/isFunction'
  * @param {Object} props
  * @param {JSX} props.children
  * @param {JSX} props.trigger
+ * @param {string} props.size - 'sm', 'md', 'lg'
  * @param {Object} props.header
  * @param {string} props.header.title
  * @param {boolean} props.header.showClose
@@ -22,7 +23,8 @@ import isFunction from '../Application/Utilities/isFunction'
  * ----------------------------------------------------------------- */
 const Modal = ({
     children, 
-    trigger, 
+    trigger,
+    size = 'md',
     header = {
         title: 'Modal', showClose: true
     }, 
@@ -120,7 +122,7 @@ const handleSubmit = useCallback(() => {
     <ButtonWrapper onClick={()=>setOpen(!open)}>
         {trigger}
     </ButtonWrapper>
-    <StyledModal ref={ModalRef}>
+    <StyledModal ref={ModalRef} size={size}>
         <ModalHeader>
             <ModalTitle className='title'>{header.title}</ModalTitle>
             <Render if={header.showClose}>
@@ -148,6 +150,25 @@ const handleSubmit = useCallback(() => {
 
 export default Modal
 
+/** -----------------------------------------------------------------
+ * @param {*} size  - 'sm', 'md', 'lg', 'xl'
+ * @returns  string size of the Modal dialog in CSS ch units
+ * ----------------------------------------------------------------- */
+const getModalSize = (size) => {
+    switch (size) {
+        case 'sm':
+            return '60ch'
+        case 'md':
+            return '80ch'
+        case 'lg':
+            return '100ch'
+        case 'xl':
+            return '120ch'
+        default:
+            return '80ch'
+    }
+}
+
 /** ----------------------------------------------------------------
  * @description Styled components
  * ----------------------------------------------------------------- */
@@ -159,7 +180,7 @@ const StyledModal = styled.dialog`
     box-shadow: 0 0 0.5rem hsla(0, 0%, 0%, 0.5);
     background-color: var(--Secondary);
     color: var(--Text);
-    width: min(90vw, 80ch);
+    width: min(90vw,  ${props => props.size ? getModalSize(props.size) : '80ch'});
     > * {
         padding-inline: 1rem;
     }
