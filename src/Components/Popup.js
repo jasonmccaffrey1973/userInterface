@@ -2,8 +2,37 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { styled } from 'styled-components'
 import { Render } from '../Application/Utilities/Render'
 import { Button, ButtonWrapper } from '../public/ComponentSyles'
+import isFunction from '../Application/Utilities/isFunction'
 
-const Popup = ({children, trigger, header = {title: 'Modal', showClose: true}}) => {
+/** ----------------------------------------------------------------
+ * @description Renders a Modal dialog
+ * @param {Object} props
+ * @param {JSX} props.children
+ * @param {JSX} props.trigger
+ * @param {Object} props.header
+ * @param {string} props.header.title
+ * @param {boolean} props.header.showClose
+ * @param {Object} props.footer
+ * @param {boolean} props.footer.showFooter
+ * @param {boolean} props.footer.showSubmit
+ * @param {boolean} props.footer.showClose
+ * @param {string} props.footer.submitLabel
+ * @param {string} props.footer.closeLabel
+ * @returns JSX
+ * ----------------------------------------------------------------- */
+const Popup = ({
+    children, 
+    trigger, 
+    header = {
+        title: 'Modal', showClose: true
+    }, 
+    footer = {
+        showFooter: true, showSubmit: true, showClose: true, submitLabel: 'Submit', closeLabel: 'Close'
+    }, 
+    onOpen = null,
+    onClose = null,
+    onSubmit = null
+}) => {
     const [open, setOpen] = useState(false)
     const popupRef = useRef()
 
@@ -26,29 +55,61 @@ const Popup = ({children, trigger, header = {title: 'Modal', showClose: true}}) 
  * @description Handles the submit button click
  * @returns void
  * ----------------------------------------------------------------- */
-    const handleSubmit = () => {
-        console.log('Submit clicked')
-        setTimeout(()=>setOpen(false), 1000)
-        }
+const handleSubmit = useCallback(() => {
+    if (!onSubmit || !isFunction(onSubmit)) return
+    onSubmit()
+    setOpen(false)
+}
+, [onSubmit])
+
+/** ----------------------------------------------------------------
+ *  @description Handles the Modal dialog open event
+ *  @returns void 
+ * ----------------------------------------------------------------- */
+    const handleClose = useCallback((dialog) => {
+        dialog.close()
+        if (!onClose || !isFunction(onClose)) return
+        onClose()
+    }
+    , [onClose])
+
+/** ----------------------------------------------------------------
+ *  @description Handles the Modal dialog open event
+ *  @returns void 
+ * ----------------------------------------------------------------- */
+    const handleOpen = useCallback((dialog) => {
+        dialog.showModal()
+        if (!onOpen || !isFunction(onOpen)) return
+        onOpen()
+    }
+    , [onOpen])
+
+/** ----------------------------------------------------------------
+ * @description Handles the Modal dialog click
+ * ----------------------------------------------------------------- */
+    const handleModalClick = useCallback((e) => {
+        listenBackdrop(e)
+    }, [listenBackdrop])
+
         
 /** ----------------------------------------------------------------
  * @description Adds the event listener for the Modal dialog
  * @returns void
  * ----------------------------------------------------------------- */
-    useEffect(() => {     
+    useEffect(() => {  
         const dialog = popupRef.current
         if (open) {
-            dialog.addEventListener('click', listenBackdrop)
-            dialog.showModal()
-        }  else {
-            dialog.removeEventListener('click', listenBackdrop)
-            dialog.close()
+            handleOpen(dialog)
+            dialog.addEventListener('click', e=>handleModalClick(e))  
+        } else {
+            handleClose(dialog)
+            dialog.removeEventListener('click', e=>handleModalClick(e))
         } 
         return () => {
-            dialog.removeEventListener('click', listenBackdrop)
+            dialog.removeEventListener('click', e=>handleModalClick(e))
         }
     }
-    , [open, popupRef, listenBackdrop])
+    , [open, popupRef, listenBackdrop, handleModalClick, handleOpen, handleClose])
 
 /** ----------------------------------------------------------------
  * @description Renders the Modal dialog
@@ -63,16 +124,23 @@ const Popup = ({children, trigger, header = {title: 'Modal', showClose: true}}) 
         <ModalHeader>
             <ModalTitle className='title'>{header.title}</ModalTitle>
             <Render if={header.showClose}>
-                <HeaderClose className='close' onClick={()=>setOpen(!open)}>&times;</HeaderClose>
+                <HeaderClose className='close' onClick={()=>setOpen(false)}
+                >&times;</HeaderClose>
             </Render>
         </ModalHeader>
         <ModalBody>
             {children}
         </ModalBody>
-        <ModalFooter>
-            <Button color='success' className='submit' onClick={()=>handleSubmit()}>Submit</Button>
-            <Button color='danger' className='close' onClick={()=>setOpen(!open)}>Close</Button>
-        </ModalFooter>
+        <Render if={footer.showFooter}>
+            <ModalFooter>
+                <Render if={footer.showSubmit}>
+                    <Button color='success' className='submit' onClick={()=>handleSubmit()}>{footer.submitLabel}</Button>
+                </Render>
+                <Render if={footer.showClose}>
+                    <Button color='danger' className='close' onClick={()=>setOpen(false)}>{footer.closeLabel}</Button>
+                </Render>
+            </ModalFooter>
+        </Render>
     </StyledPopup>
     </>
   )
