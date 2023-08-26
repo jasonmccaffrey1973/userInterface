@@ -20,7 +20,7 @@ import isFunction from '../Application/Utilities/isFunction'
  * @param {string} props.footer.closeLabel
  * @returns JSX
  * ----------------------------------------------------------------- */
-const Popup = ({
+const Modal = ({
     children, 
     trigger, 
     header = {
@@ -34,7 +34,7 @@ const Popup = ({
     onSubmit = null
 }) => {
     const [open, setOpen] = useState(false)
-    const popupRef = useRef()
+    const ModalRef = useRef()
 
 /** ----------------------------------------------------------------
  * @description Listens for clicks outside the Modal dialog to close it
@@ -42,14 +42,14 @@ const Popup = ({
  * @returns void
  * ----------------------------------------------------------------- */
     const listenBackdrop = useCallback((e) => {
-        const dialogDimensions = popupRef.current.getBoundingClientRect()
+        const dialogDimensions = ModalRef.current.getBoundingClientRect()
         if (
             e.clientX < dialogDimensions.left ||
             e.clientX > dialogDimensions.right ||
             e.clientY < dialogDimensions.top ||
             e.clientY > dialogDimensions.bottom
         ) setOpen(false)
-    }, [popupRef])
+    }, [ModalRef])
 
 /** ----------------------------------------------------------------
  * @description Handles the submit button click
@@ -97,7 +97,7 @@ const handleSubmit = useCallback(() => {
  * @returns void
  * ----------------------------------------------------------------- */
     useEffect(() => {  
-        const dialog = popupRef.current
+        const dialog = ModalRef.current
         if (open) {
             handleOpen(dialog)
             dialog.addEventListener('click', e=>handleModalClick(e))  
@@ -109,7 +109,7 @@ const handleSubmit = useCallback(() => {
             dialog.removeEventListener('click', e=>handleModalClick(e))
         }
     }
-    , [open, popupRef, listenBackdrop, handleModalClick, handleOpen, handleClose])
+    , [open, ModalRef, listenBackdrop, handleModalClick, handleOpen, handleClose])
 
 /** ----------------------------------------------------------------
  * @description Renders the Modal dialog
@@ -120,7 +120,7 @@ const handleSubmit = useCallback(() => {
     <ButtonWrapper onClick={()=>setOpen(!open)}>
         {trigger}
     </ButtonWrapper>
-    <StyledPopup ref={popupRef}>
+    <StyledModal ref={ModalRef}>
         <ModalHeader>
             <ModalTitle className='title'>{header.title}</ModalTitle>
             <Render if={header.showClose}>
@@ -141,22 +141,24 @@ const handleSubmit = useCallback(() => {
                 </Render>
             </ModalFooter>
         </Render>
-    </StyledPopup>
+    </StyledModal>
     </>
   )
 }
 
-export default Popup
+export default Modal
 
 /** ----------------------------------------------------------------
  * @description Styled components
  * ----------------------------------------------------------------- */
-const StyledPopup = styled.dialog`
+const StyledModal = styled.dialog`
     border-radius: 0.2rem;
     padding: 0;
     padding-block: 0.5rem 1rem;
     border: none;
     box-shadow: 0 0 0.5rem hsla(0, 0%, 0%, 0.5);
+    background-color: var(--Secondary);
+    color: var(--Text);
     width: min(90vw, 80ch);
     > * {
         padding-inline: 1rem;

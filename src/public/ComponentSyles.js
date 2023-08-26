@@ -80,7 +80,7 @@ export const DivWrapper = styled.div`
 
 export const Button = styled.button`
     background-color: ${props => props.color ? bootstrapColor(props.color) : 'var(--Primary)'};
-    color: var(--PrimaryLight);
+    color: var(--White);
     border: hsla(0, 0%, 0%, 0.1) 1px solid;
     position: relative;
     width: fit-content;
