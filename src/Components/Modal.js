@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { styled } from 'styled-components'
 import { Render } from '../Application/Utilities/Render'
-import { Button, ButtonWrapper } from '../public/ComponentSyles'
+import { Button } from '../public/ComponentSyles'
 import isFunction from '../Application/Utilities/isFunction'
 
 /** ----------------------------------------------------------------
@@ -119,9 +119,10 @@ const handleSubmit = useCallback(() => {
  * ----------------------------------------------------------------- */
   return (
     <>
-    <ButtonWrapper onClick={()=>setOpen(!open)}>
+        <span onClick={()=>setOpen(!open)}>
         {trigger}
-    </ButtonWrapper>
+        </span>
+    
     <StyledModal ref={ModalRef} size={size}>
         <ModalHeader>
             <ModalTitle className='title'>{header.title}</ModalTitle>
