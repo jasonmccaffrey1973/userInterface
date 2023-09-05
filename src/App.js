@@ -4,7 +4,8 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
-import Tooltip from './Components/Tooltip'
+import Calendar from './Components/Calendar'
+
 
 const App = () => {
   return (
@@ -15,9 +16,7 @@ const App = () => {
         <Header/>
         <Footer/>
         <main>
-          <Tooltip tooltip={'This is a test of the tooltip'}>
-            Tooltip
-          </Tooltip>
+          <Calendar />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
