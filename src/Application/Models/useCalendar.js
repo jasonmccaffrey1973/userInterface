@@ -8,11 +8,10 @@ const useCalendar = ({ monthObj = { } }) => {
     });
 
     const today = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
-    
-    const beginOffset = moment(monthState).startOf('month').format("d");
-    const daysInMonth = moment(monthState).daysInMonth();
 
-    const trailingDays = (Number(beginOffset) + Number(daysInMonth)) % 7;
+    const beginOffset = moment(monthState).startOf('month').day();
+    const daysInMonth = moment(monthState).daysInMonth();
+    const trailingDays = (7 - (beginOffset + daysInMonth) % 7) % 7;
 
     const dayArray = [...Array(Number(beginOffset)).fill({ date: '' })];
     for (let i = 1; i <= daysInMonth; i++) {

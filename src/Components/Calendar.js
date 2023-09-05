@@ -67,6 +67,15 @@ list-style: none;
         }
     }
 }
+.calendar__header-day {
+    display: grid;
+    place-items: center;
+    font-size: var(--TextSmall);
+    font-weight: var(--TextBold);
+    text-transform: uppercase;
+    color: var(--TextLight);
+    border-bottom: 1px solid var(--Accent);
+}
 `
 
 const CalendarDay = styled.li`
@@ -99,7 +108,7 @@ const Calendar = ({month = null, year = null}) => {
                 <button className="prev-month" onClick={prevMonth}></button>
                 <button className="next-month" onClick={nextMonth}></button>
             </div>
-            {weekDays.map((day, index) => <div key={index} className="calendar__week-day">{day}</div>
+            {weekDays.map((day, index) => <div key={index} className="calendar__header-day">{day}</div>
         )}
             </CalendarHeader>
         )
