@@ -85,9 +85,25 @@ background-color: var(--PrimaryLight);
 color: var(--color-white);
 font-size: var(--TextMedium);
 aspect-ratio: 1 / 1;
+transition: background-color 200ms ease-in-out;
 &.null-date {
     pointer-events: none;
     background-color: transparent;
+}
+.day__date {
+    --_offset: 0.2ch;
+    --_size: 3ch;
+    display: grid;
+    place-items: center;
+    font-size: var(--TextMedium);
+    font-weight: var(--TextRegular);
+    width: var(--_size);
+    aspect-ratio: 1 / 1;
+    margin: var(--_offset) 0 0 var(--_offset);
+    border-radius: 50%;
+    &.today {
+        border: 1px solid var(--Red);
+    }
 }
 &:hover, &:focus {
     background-color: var(--Accent);
@@ -116,7 +132,9 @@ const Calendar = ({month = null, year = null}) => {
 
     const Days = () => {
         return monthData.days.map((day, index) => {
-            return <CalendarDay className={day.date === '' ? 'null-date' : ''} key={index}>{day.date}</CalendarDay>
+            return <CalendarDay className={!day.active ? 'null-date' : ''} key={index}>
+                {day.active && <div className={day.today ? 'day__date today' : 'day__date'}>{day.date}</div>}
+            </CalendarDay>
         })
     }
 
