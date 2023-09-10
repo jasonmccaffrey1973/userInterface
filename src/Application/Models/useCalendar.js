@@ -115,9 +115,19 @@ const useCalendar = ({ monthObj = {} }) => {
   };
 
 /** ----------------------------------------------------------
+ * Function to navigate to a specific month
+ * params: object with the following properties:
+ * month: number (1-12) if not provided, the current month will be used
+ * year: number (YYYY) if not provided, the current year will be used
+ * ----------------------------------------------------------- */
+  const setMonth = ({month = monthState.month, year = monthState.year}) => {
+    setMonthState({month, year});
+  }
+
+/** ----------------------------------------------------------
  * Return the month object, today's date, and functions to navigate to the next and previous months
  * ----------------------------------------------------------- */
-  return { month, today, nextMonth, prevMonth };
+  return { month, today, nextMonth, prevMonth, setMonth };
 }
 
 export default useCalendar;

@@ -130,10 +130,17 @@ const Calendar = ({month = null, year = null}) => {
         )
     }
 
+    const ShowDayEvents = events => {
+        return events.map((event, index) => {
+            return <div key={index} className="day__event">{event}</div>
+        })
+    }
+
     const Days = () => {
         return monthData.days.map((day, index) => {
             return <CalendarDay className={!day.active ? 'null-date' : ''} key={index}>
                 {day.active && <div className={day.today ? 'day__date today' : 'day__date'}>{day.date}</div>}
+                {day.events?.length > 0 && <ShowDayEvents events={day.events} />}
             </CalendarDay>
         })
     }

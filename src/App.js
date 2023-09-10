@@ -8,11 +8,12 @@ import Calendar from './Components/Calendar'
 
 
 const App = () => {
+  const columns = UserPreferences.layout.split(' ').length
   return (
     <>
     <ThemeProvider>
       <ApplicationStyles />
-      <StyledApp layout={UserPreferences.layout}>
+      <StyledApp layout={UserPreferences.layout} columns={columns}>
         <Header/>
         <Footer/>
         <main>
@@ -35,7 +36,7 @@ min-height: 100dvh;
 width: 100%;
 height: 100%;
 display: grid;
-grid-template-columns: auto auto auto;
+grid-template-columns: repeat(${props => props.columns}, auto);
 grid-template-rows: auto 1fr auto;
 grid-template-areas: ${props => props.layout};
 position: relative;
