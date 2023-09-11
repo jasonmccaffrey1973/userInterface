@@ -1,6 +1,6 @@
 const UserPreferences = {
     theme: 'light',
-    layout: "'header header' 'primary-sidebar main' 'footer footer'",
+    layout: "'header header header' 'primary-sidebar main secondary-sidebar' 'footer footer footer'",
     notifications: true,
     notification_type: 'email',
     notification_frequency: 'daily',

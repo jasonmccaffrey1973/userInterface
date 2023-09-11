@@ -8,12 +8,33 @@ import Calendar from './Components/Calendar'
 
 
 const App = () => {
-  const columns = UserPreferences.layout.split(' ').length
+
+  const getColumnData = () => {
+    let mainPos = null;
+    const rows = UserPreferences.layout.split("' '");
+    rows.forEach(row => {
+      const columns = row.split(' ');
+      if (columns.includes('main') && !mainPos) mainPos = columns.indexOf('main');
+    });
+    const columnLayout = rows.map((row, rowIndex) => {
+      const columns = row.split(' ');
+      return columns.map((column, index) => (index === mainPos && rowIndex === 0) ? '1fr' : 'auto');
+    });
+  
+    const flattenedLayout = columnLayout.flat().join(' ');
+  
+    return {
+      layout: flattenedLayout,
+      columns: flattenedLayout.split(' ').length
+    };
+  };
+  
+
   return (
     <>
     <ThemeProvider>
       <ApplicationStyles />
-      <StyledApp layout={UserPreferences.layout} columns={columns}>
+      <StyledApp layout={UserPreferences.layout} columns={getColumnData()}>
         <Header/>
         <Footer/>
         <main>
@@ -36,7 +57,7 @@ min-height: 100dvh;
 width: 100%;
 height: 100%;
 display: grid;
-grid-template-columns: repeat(${props => props.columns}, auto);
+grid-template-columns: ${props => props.columns.layout};
 grid-template-rows: auto 1fr auto;
 grid-template-areas: ${props => props.layout};
 position: relative;
@@ -66,6 +87,8 @@ position: relative;
   background-color: var(--Secondary);
   color: var(--Text);
   padding-block: var(--spacer);
+  width: min(100%, 80rem);
+  margin-inline: auto;
 }
 > aside {
   grid-area: secondary-sidebar;
