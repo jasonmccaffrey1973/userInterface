@@ -5,6 +5,7 @@ import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
 import Calendar from './Components/Calendar'
+import Carousel from './Components/Carousel'
 
 
 const App = () => {
@@ -38,7 +39,7 @@ const App = () => {
         <Header/>
         <Footer/>
         <main>
-          <Calendar />
+          <Carousel />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
