@@ -1,19 +1,21 @@
 import styled from 'styled-components'
+import { useColorVariants, textSizes } from '../public/ComponentSyles';
 
 /** ----------------------------------------------------------------- 
- * @param {*} color
- * @param {*} size
- * @param {*} text
- * @param {*} action
+ * @param {*} color     Primary, Secondary, Success, Danger, Warning, Info, Light, Dark, Link (or any other theme color)
+ * @param {*} size      xs, sm, md, lg, xl
+ * @param {*} text      Button Text
+ * @param {*} action    function to be executed on click
  * @returns  CardButton component
  * @description CardButton component 
  * @example 
  *  <CardButton color='Primary' size='md' text='Click Me' action={() => console.log('Clicked')} /> 
  ** ------------------------------------------------------------------ */
 const CardButton = (button) => {
-    const {color, size, text, action} = button.button;
+    const {color, size, text, action} = button.button
+    const colorObj = useColorVariants(color)
     return (
-        <CardActionButton className={`bttn bttn-${color} bttn-${size}`} onClick={action}>{text}</CardActionButton>
+        <CardActionButton size={size} colorobj={colorObj} onClick={action}>{text}</CardActionButton>
     )
 }
 
@@ -85,14 +87,14 @@ const StyledCard = styled.div`
         z-index: 1;
         .card-title {
             margin: 0;
-            padding: 0 0.5rem;
-            font-size: calc(var(--_fs) * 1.25);
+            padding: 0 0.5rem 0.25rem 0.5rem;
+            font-size: calc(var(--_fs) * 1.333);
             font-weight: 500;
             border-bottom: 1px solid rgba(255,255,255,0.5);
         }
         .card-text {
-            font-size: calc(var(--_fs) * 0.9);
-            line-height: calc(var(--_fs) * 1.2);
+            font-size: calc(var(--_fs) * 1.0);
+            line-height: calc(var(--_fs) * 1.3333);
             padding-inline: 0.5rem;
         }  
     }
@@ -109,8 +111,21 @@ const StyledCard = styled.div`
 
 `
 
-const CardActionButton = styled.button`
-    padding: 0.25rem 1rem;
-
-
+const CardActionButton = styled.button` 
+    --_fs: ${props => textSizes(props.size)};
+    position: relative;
+    z-index: 10;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: calc(var(--_fs) * 0.125);
+    font-size: calc(var(--_fs) * 0.9);
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    background-color: ${props => props.colorobj.base};
+    color: ${props => props.colorobj.contrast};
+    transition: background-color 250ms ease-in-out;
+    &:hover, &:focus {
+        background-color: ${props => props.colorobj.hover};
+    }    
 `
