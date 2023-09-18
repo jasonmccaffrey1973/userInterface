@@ -4,8 +4,8 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
-import Calendar from './Components/Calendar'
 import Carousel from './Components/Carousel'
+import Card from './Components/Card'
 
 
 const App = () => {
@@ -31,6 +31,48 @@ const App = () => {
   };
   
 
+  const carouselItems = [
+    <Card 
+      image={'https://source.unsplash.com/random/700x700'}
+      title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!'
+      button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+      }} />,
+    <Card image={'https://source.unsplash.com/random/200x200'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+    }} />,          
+    <Card image={'https://source.unsplash.com/random/500x300'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+    }} />,          
+    <Card image={'https://source.unsplash.com/random/220x700'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+    }} />,          
+    <Card image={'https://source.unsplash.com/random/600x800'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+    }} />,          
+    <Card image={'https://source.unsplash.com/random/250x400'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
+        color: 'Accent',
+        size: 'md', 
+        text: 'Click Me',
+        action: () => console.log('Clicked'),
+    }} />
+  ];
+
   return (
     <>
     <ThemeProvider>
@@ -39,7 +81,7 @@ const App = () => {
         <Header/>
         <Footer/>
         <main>
-          <Carousel />
+          <Carousel items={carouselItems} />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
@@ -54,9 +96,10 @@ export default App
 const StyledApp = styled.div`
 --spacer: 0.5rem;
 margin: 0;
-min-height: 100dvh;
 width: 100%;
+max-width: 100dvw;
 height: 100%;
+min-height: 100dvh;
 display: grid;
 grid-template-columns: ${props => props.columns.layout};
 grid-template-rows: auto 1fr auto;
@@ -88,7 +131,8 @@ position: relative;
   background-color: var(--Secondary);
   color: var(--Text);
   padding-block: var(--spacer);
-  width: min(100%, 80rem);
+  /* width: min(100%, 80rem); */
+  max-width: 80rem;
   margin-inline: auto;
 }
 > aside {

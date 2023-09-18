@@ -110,7 +110,7 @@ function hexToHSL(hex) {
     if (colorMatch) {
       const isLightColor = parseFloat(colorMatch[3]) >= 50; // Check if lightness is above 50%
       const contrastColor = isLightColor ? 'hsla(0, 0%, 0%, 1)' : 'hsla(0, 0%, 100%, 1)';
-      const hoverColor = hexToHSL(isLightColor ? darken(0.1, CSSColor) : lighten(0.1, CSSColor));
+      const hoverColor = hexToHSL(isLightColor ? darken(0.33, CSSColor) : lighten(0.33, CSSColor));
       return {
         base: CSSColor,
         hover: hoverColor,

@@ -160,6 +160,7 @@ const StyledMenuItem = styled.li`
     box-shadow: inset 0.125rem 0.125rem 0rem 0rem rgba(0, 0, 0, 0.15);
     .label {
       background-color: var(--hover-color);
+      opacity: 0.75;
     }
     .icon {
       background-color: var(--hover-color);
