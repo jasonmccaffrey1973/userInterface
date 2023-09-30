@@ -6,6 +6,7 @@ import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
 import Carousel from './Components/Carousel'
 import Card from './Components/Card'
+import Toast from './Components/Toast'
 
 
 const App = () => {
@@ -22,7 +23,7 @@ const App = () => {
       return columns.map((column, index) => (index === mainPos && rowIndex === 0) ? '1fr' : 'auto');
     });
   
-    const flattenedLayout = columnLayout.flat().join(' ');
+    const flattenedLayout = columnLayout[0].flat().join(' ');
   
     return {
       layout: flattenedLayout,
@@ -81,7 +82,7 @@ const App = () => {
         <Header/>
         <Footer/>
         <main>
-          <Carousel items={carouselItems} />
+          <Toast position={{horz: 'right', vert: 'bottom'}} message='This is a toast message' title='Toast Title' duration={5000} />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
@@ -131,7 +132,7 @@ position: relative;
   background-color: var(--Secondary);
   color: var(--Text);
   padding-block: var(--spacer);
-  /* width: min(100%, 80rem); */
+  width: min(100%, 80rem);
   max-width: 80rem;
   margin-inline: auto;
 }
