@@ -4,9 +4,10 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
-import Carousel from './Components/Carousel'
 import Card from './Components/Card'
 import Toast from './Components/Toast'
+import PercentageGauge from './Components/PercentageGauge'
+import Loader from './Components/Loader'
 
 
 const App = () => {
@@ -83,6 +84,8 @@ const App = () => {
         <Footer/>
         <main>
           <Toast position={{horz: 'right', vert: 'bottom'}} message='This is a toast message' title='Toast Title' duration={5000} />
+          {/* <PercentageGauge value={12} color='Indigo' /> */}
+          <Loader />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
