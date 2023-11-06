@@ -106,7 +106,7 @@ const StyledToast = styled.div`
     letter-spacing: 0.5px;
     line-height: calc((1rem * var(--_size)) + var(--_toastPadding));
     transition: background-color 250ms ease-in-out;
-    animation: ${props => props.animation} 1000ms linear ${props => props.delay + 'ms'}  forwards;
+    animation: ${props => props.animation} 15000s linear ${props => props.delay + 'ms'}  forwards;
     .icon {
         grid-area: icon;
         display: grid;
