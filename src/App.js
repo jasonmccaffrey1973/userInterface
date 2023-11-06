@@ -4,9 +4,6 @@ import Header from './Components/Header'
 import Footer from './Components/Footer'
 import ApplicationStyles from './public/ApplicationStyles'
 import { ThemeProvider } from './Contexts/ThemeContext'
-import Card from './Components/Card'
-import Toast from './Components/Toast'
-import PercentageGauge from './Components/PercentageGauge'
 import Loader from './Components/Loader'
 
 
@@ -31,49 +28,6 @@ const App = () => {
       columns: flattenedLayout.split(' ').length
     };
   };
-  
-
-  const carouselItems = [
-    <Card 
-      image={'https://source.unsplash.com/random/700x700'}
-      title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!'
-      button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-      }} />,
-    <Card image={'https://source.unsplash.com/random/200x200'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-    }} />,          
-    <Card image={'https://source.unsplash.com/random/500x300'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-    }} />,          
-    <Card image={'https://source.unsplash.com/random/220x700'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-    }} />,          
-    <Card image={'https://source.unsplash.com/random/600x800'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-    }} />,          
-    <Card image={'https://source.unsplash.com/random/250x400'} title='Title 1' text='Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at cupiditate laudantium praesentium. Natus libero odio ipsam explicabo nisi repellat!' button={ {
-        color: 'Accent',
-        size: 'md', 
-        text: 'Click Me',
-        action: () => console.log('Clicked'),
-    }} />
-  ];
 
   return (
     <>
@@ -83,9 +37,7 @@ const App = () => {
         <Header/>
         <Footer/>
         <main>
-          <Toast position={{horz: 'right', vert: 'bottom'}} message='This is a toast message' title='Toast Title' duration={5000} />
-          {/* <PercentageGauge value={12} color='Indigo' /> */}
-          <Loader />
+          <Loader backdrop={false} />
         </main>
         <aside>Secondary Sidebar</aside>
         <aside className="sidebar">Primary Sidebar</aside>
