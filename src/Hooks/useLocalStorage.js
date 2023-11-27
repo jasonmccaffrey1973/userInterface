@@ -55,27 +55,42 @@ const useLocalStorage = (LOCALSTORAGE_KEY = 'OF_APP') => {
 
 /** -------------------------------------------------------------------------
  * Function to get a value from the state
+ * If a key is passed, return the value of that key. If an array of keys
+ * is passed, return an object with the values of those keys. If no key
+ * is passed, return null.
  * 
- * @param {string} key - The key to get from the state
- * @param {boolean} remove - Whether to remove the key from the state
- * @returns {*} - The value of the key from the state
+ * @param {string} key      - The key to get from the state
+ * @param {boolean} remove  - Whether to remove the key from the state
+ * @param {array} keys      - An array of keys to get from the state
+ * @returns {*}             - The value of the key from the state
  * -------------------------------------------------------------------------- */
-    const getLocalStorage = (key, remove = false) => {
-        const value = localStorageState[key];
-        if (remove) removeLocalStorage(key);
-        return value ?? null;
+    const getLocalStorage = (key, remove = false, keys = []) => {
+        // Function to get a value from the state and optionally remove it
+        const _getValue = (key, remove) => {
+            const value = localStorageState[key];
+            if (remove) removeLocalStorage(key);
+            return value ?? null;
+        }
+        // Return the value of the key, an object with the values of the keys or null based on the parameters passed
+        return key ? _getValue(key, remove) : keys.reduce((acc, key) => ({ ...acc, [key]: _getValue(key, remove) }), null);
     }
 
 /** -------------------------------------------------------------------------
  * Function to save a value to the state
  * 
- * @param {string} key - The key to save to the state
- * @param {*} value - The value to save to the state
+ * @param {object} data - An object with the key and value to save to the state
+ * @param {array} data  - An array of objects with the keys and values to save 
+ *                        to localstorage state
  * @returns {void}
  * -------------------------------------------------------------------------- */
-    const saveLocalStorage = (key, value) => {
-        setLocalStorageState(prevState => ({ ...prevState, [key]: value }));
-    }
+const saveLocalStorage = (localStorageItem) => {
+    setLocalStorageState(prevState => {
+        const newState = Array.isArray(localStorageItem)
+            ? { ...prevState, ...Object.fromEntries(localStorageItem.map(item => [Object.keys(item)[0], item[Object.keys(item)[0]]])) }
+            : { ...prevState, ...localStorageItem };
+        return newState;
+    });
+};
 
 /** -------------------------------------------------------------------------
  * Return the state and functions
